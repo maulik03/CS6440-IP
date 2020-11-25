@@ -1,0 +1,100 @@
+<html>
+<body>
+
+  <nav class="navbar navbar-expand-md navbar navbar-light fixed-top " style="background-color: #137de0;">
+    <a class="navbar-brand text-white">BloodSugar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#/homePage">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#/inputForm">InputForm</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#/report">BloodSugarReport</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#/viewPharmacy">Pharmacy</a>
+        </li>
+      </ul>
+    </div>
+					<button type="submit" class="btn btn-warning" ng-click="logout()">Logout</button>
+  </nav>
+  <br><br><br>
+  
+  <div class ="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 style= "text-align: center;"class="card-title">Patient information</h5>
+            <div>
+              FirstName:
+              <p id="f_name"></p>
+              LastName:
+              <p id="l_name"></p>
+              Age:
+              <p id="date"></p>
+            </div>
+            PhoneNumber:
+            <p id ="pnumber"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 style= "text-align: center;"class="card-title">Pharmacy informaiton</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</br></br></br>
+  <div class ="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 style= "text-align: center;"class="card-title">Medicine information</h5>
+            <table class="table table-striped">
+              <thead style= "text-align: center;">
+                <tr>
+                  <th>Medicine Name</th>
+                  <th>Medcine informaiton</th>
+                  <th>Medicine Status</th>
+                </tr>
+              </thead>
+              <tbody style= "text-align: center;">
+                <tr ng-repeat = "entry in reading_data">
+                 <td>{{entry.med_name}}</td>
+                 <td>{{entry.med_info}}</td>
+                 <td>{{entry.med_status}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 style= "text-align: center;"class="card-title">Prescription informaiton</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
