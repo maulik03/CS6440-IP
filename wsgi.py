@@ -74,6 +74,14 @@ def addMedicine():
     print(reading_data)
     return json.dumps(reading_data)
 
+## get all the medicines 
+@app.route("/getEverypatientmeds", methods=['GET','POST']) 
+def getEverypatientmeds():
+    data = request.get_json()
+    reading_data = medicine.getALL_Medicines(data)
+    print(reading_data)
+    return json.dumps(reading_data)
+
 ## update the medicine  status
 @app.route("/updatemedstatus", methods=['GET','POST'])
 def updatemedstatus():

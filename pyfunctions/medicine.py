@@ -26,3 +26,12 @@ def update_medstatus(data):
     upd_records = runQuery.updateDB(query)
     return upd_records
 
+## get all medicine for patient
+
+def getALL_Medicines(data):
+    print(data)
+    query_1 = """select * from medicine where p_email = \'"""+data['p_email']+"""\';"""
+    ##print(query_1)
+    reading_records = runQuery.queryDB(query_1)
+    return reading_records
+

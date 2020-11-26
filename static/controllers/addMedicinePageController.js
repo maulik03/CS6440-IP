@@ -35,8 +35,8 @@ $scope.pageReload= function(){
 	$scope.successMessage = " Medicine has been added for selected patient";
 	$scope.successMessagebool = true;
 	$timeout(function() { 
-		//$route.reload();
-		$location.path('/doctorhomePage')
+		$route.reload();
+		//$location.path('/doctorhomePage')
 	}, 1000);
 }
 

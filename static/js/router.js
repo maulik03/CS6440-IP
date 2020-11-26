@@ -24,7 +24,7 @@ angular.module('router.module',[]).config(function ($routeProvider) {
 		.when('/inputForm',
 		{
 			controller: 'inputPageController',
-			templateUrl: 'static/views/inputform.html'
+			templateUrl: 'static/views/addreadingPage.html'
 		})
 		.when('/doctorhomePage',
 		{

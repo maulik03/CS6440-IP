@@ -10,7 +10,7 @@ angular.module('detailsPageController.module',[]).controller('detailsPageControl
   $scope.getpatientmeds=function(){
 	$http({
 		method : "POST",
-			url : "/getMedicineInformation",
+			url : "/getEverypatientmeds",
 			data : 
 			{
 				"p_email" : $scope.p_user
