@@ -15,7 +15,6 @@ angular.module('router.module',[]).config(function ($routeProvider) {
 			controller: 'loginPageController',
 			templateUrl: 'static/views/loginPage.html'
 		})
-
 		.when('/homePage',
 		{
 			controller: 'homePageController',

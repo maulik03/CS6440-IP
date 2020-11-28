@@ -93,17 +93,32 @@ def updatemedstatus():
 
 
 ## get the List of Pharmacy information
-@app.route("/getPharmacy", methods=['GET','POST'])
-def getPharmacy():
+@app.route("/getAllPharmacy", methods=['GET','POST'])
+def getallPharmacy():
     reading_data = pharmacy.getAll_pharmacy()
     print(reading_data)
     return json.dumps(reading_data)
 
 ## get the List of Pharmacy information
-@app.route("/myPharmacy", methods=['GET','POST'])
-def myPharmacy():
+@app.route("/addmyPharmacy", methods=['GET','POST'])
+def addmyPharmacy():
     data = request.get_json()
     reading_data = pharmacy.insert_pharmacy(data)
+    print(reading_data)
+    return json.dumps(reading_data)
+
+## get the List of Pharmacy information
+@app.route("/getmyPharmacy", methods=['GET','POST'])
+def getmyPharmacy():
+    data = request.get_json()
+    reading_data = pharmacy.select_pharmacy(data)
+    print(reading_data)
+    return json.dumps(reading_data)
+
+@app.route("/deletemyPharmacy", methods=['GET','POST'])
+def deletemyPharmacy():
+    data = request.get_json()
+    reading_data = pharmacy.del_pharmacy(data)
     print(reading_data)
     return json.dumps(reading_data)
 

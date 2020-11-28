@@ -1,8 +1,9 @@
-angular.module('homePageController.module',[]).controller('homePageController', function($scope,$location,$http, $cookies){
+angular.module('homePageController.module',[]).controller('homePageController', function($route,$timeout,$scope,$location,$http, $cookies){
 
   $scope.adminLoggedIn = ($cookies.get("is_admin") === "true");
 
   $scope.user = $cookies.get("p_email");
+  $scope.messagebool = false;
 
 
   $scope.getPatientInfo=function(){
@@ -24,13 +25,6 @@ angular.module('homePageController.module',[]).controller('homePageController', 
 	  document.getElementById("date").innerHTML = getAge(b_date);
 	  var phoneNum = response.data[0].phone_number;
 	  document.getElementById("pnumber").innerHTML = phoneNum;
-	//   angular.forEach($scope.reading_data, function(item){
-	// 	$scope.p_email = item.p_email; // id is in $scope.Id
-	// 	$scope.f_name = item.f_name;
-	// 	$scope.l_name = item.l_name;
-	// 	$scope.b_date = item.b_date;
-	// 	$scope.phoneNum = item.phone_number;
-	// });
 	  function getAge(dateString) {
 		var today = new Date();
 		var birthDate = new Date(dateString);
@@ -43,6 +37,8 @@ angular.module('homePageController.module',[]).controller('homePageController', 
 		return age;
 	  
 	}
+	$scope.getMedicineInfo()
+	$scope.getPharmacyInfo()
 
   	}, function myError(response) {
   		console.log(response);
@@ -65,7 +61,60 @@ angular.module('homePageController.module',[]).controller('homePageController', 
   		console.log(response);
   	});
   } 
-  $scope.getMedicineInfo()
+  //$scope.getMedicineInfo()
+
+  //Pharmacy Information
+  $scope.getPharmacyInfo=function(){
+	$http({
+		method : "POST",
+		  url : "/getmyPharmacy",
+		  data :{"p_email" : $scope.user}
+	}).then(function mySuccess(response) {
+	console.log(response.data)
+
+	$scope.myPharm_info = response.data;
+	if(response.data === undefined || response.data.length == 0){
+		$scope.displaymessage = "Please select the Pharmacy from the Pharmacy page !!"
+		$scope.messagebool= true;
+	}
+	//console.log(messagebool)
+	
+	}, function myError(response) {
+		console.log(response);
+	});
+} 
+//$scope.getPharmacyInfo()
+
+$scope.deletePharmacy=function(){
+	$http({
+		method : "POST",
+		  url : "/deletemyPharmacy",
+		  data :{"p_email" : $scope.user,"id":$scope.pharm_number}
+	}).then(function mySuccess(response) {
+	console.log(response.data)
+	if(response.data){
+		$scope.pageReload();
+		//$scope.getPatientInfo()	
+	}else{
+		$scope.errormsg = true;
+	  }
+
+	$scope.myPharm_info = response.data;
+
+	}, function myError(response) {
+		console.log(response);
+	});
+} 
+// page reload function
+$scope.pageReload= function(){
+	$scope.successMessage = "Pharmacy has been removed";
+	$scope.successMessagebool = true;
+	$timeout(function() { 
+		$route.reload();
+		$location.path('/viewPharmacy')
+	}, 150);
+}
+
 
 	$scope.logout = function(email){
 		$cookies.remove("p_email");

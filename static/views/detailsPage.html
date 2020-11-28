@@ -21,6 +21,7 @@
   <main role="main">
 
 		<div class="container">
+      <h3>{{p_user}} Medicine Information</h3>
 			<!-- Example row of columns -->
 
         <table class="table table-striped" style= "text-align: center;">
@@ -45,10 +46,56 @@
             </tr>
            </tbody>
          </table>
+        
+    </div>
+    <!--pharmacy info-->
+    <div class = "container">
+      <h3>{{p_user}} Blood Sugar Report</h3>
+      <table class="table table-striped" style= "text-align: center;">
+        <thead>
+          <tr>
+            <th>BloodSugarLevel (mg/dL)</th>
+            <th>WhenMeasured</th>
+            <th>Time</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat = "entry in patient_bst_data">
+           <td>{{entry.bloods_level}}</td>
+           <td>{{entry.when_measured}}</td>
+           <td>{{entry.measured_time}}</td>
+           <td>{{entry.entered_date}}</td>
+          </tr>
+        </tbody>
+      </table>
 
+    </div>
 
-			<br>
-
+    <!--Patient Pharmacy info-->
+    <div class = "container">
+      <h3>{{p_user}}'s Pharmacy</h3>
+      <table class="table table-striped" style= "text-align: center;">
+        <thead>
+          <tr>
+            <th>Pharmacy Name</th>
+            <th>Pharmacy Address</th>
+            <th>Pharmacy Number</th>
+            <th>Pharmacy Fax</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat = "entry in myPharm_info">
+           <td>{{entry.pharm_name}}</td>
+           <td>{{entry.pharm_adr}}</td>
+           <td>{{entry.pharm_num}}</td>
+           <td>{{entry.pharm_fax}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class ="alert alert-warning" ng-show="messagebool">
+        <strong>{{displaymessage}}</strong>
+      </div>
 
     </div>
 

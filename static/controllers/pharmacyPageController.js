@@ -1,4 +1,4 @@
-angular.module('pharmacyPageController.module',[]).controller('pharmacyPageController', function($scope,$location,$http, $cookies){
+angular.module('pharmacyPageController.module',[]).controller('pharmacyPageController', function($timeout,$scope,$location,$http, $cookies){
 
   $scope.adminLoggedIn = ($cookies.get("is_admin") === "true");
   $scope.user = $cookies.get("p_email");
@@ -8,7 +8,7 @@ angular.module('pharmacyPageController.module',[]).controller('pharmacyPageContr
   $scope.getPharmacyList=function(){
 	$http({
 		method : "POST",
-			url : "/getPharmacy"
+			url : "/getAllPharmacy"
 	}).then(function mySuccess(response) {
 	console.log(response.data)
 
@@ -16,6 +16,7 @@ angular.module('pharmacyPageController.module',[]).controller('pharmacyPageContr
 	angular.forEach($scope.pharmacy_data, function(item){
 		$scope.pharmid = item.pharmid; // id is in $scope.Id
 		$scope.pharm_name = item.pharm_name;
+		$scope.pharm_number = item.pharm_number;
 	});
 
 	}, function myError(response) {
@@ -28,24 +29,35 @@ $scope.getPharmacyList()
 $scope.selectmyPharmacy=function(){
 	var data ={
 		"p_email" : $scope.user,
-		"id":$scope.pharmid,
+		"id":$scope.pharm_number,
 		"name":$scope.pharm_name
 	};
 	console.log(data);
 	$http({
 		method : "POST",
-		url : "/myPharmacy",
+		url : "/addmyPharmacy",
 		data:data
 			
 	}).then(function mySuccess(response) {
 	console.log(response.data)
+	if(response.data){
+		$scope.pageReload();	
+	}else{
+		$scope.errormsg = true;
+	  }
 
 	}, function myError(response) {
 		console.log(response);
 	});
 }
 
-$scope.selectmyPharmacy()
+// page reload function
+$scope.pageReload= function(){
+	$timeout(function() { 
+		//$route.reload();
+		$location.path('/homePage')
+	}, 1000);
+}
 
 	$scope.logout = function(email){
 		$cookies.remove("p_email");

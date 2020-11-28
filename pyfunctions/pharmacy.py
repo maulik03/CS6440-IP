@@ -9,10 +9,8 @@ def getAll_pharmacy():
 
 #select pharmacy for the patients
 def select_pharmacy(data):
-    select_query = """select pha.pharm_name,pha.pharm_adr,pha.pharm_num,pha.pharm_fax from patient as u 
-    inner join user_pharmacy as u_pharm on u_pharm.fk_user_pharmacy_user= u.email 
-    inner join pharmacy as pha on pha.pharmid = u_pharm.fk_user_pharmacy_pharmID 
-    where u.email = \'"""+data['email']+"""\';"""
+    select_query = """select pharm.* from user_pharmacy as u_pharm
+    inner join pharmacy as pharm on pharm.pharm_number = u_pharm.pharm_number where p_email = \'"""+data['p_email']+"""\';"""
     print(select_query)
 
     reading_records = runQuery.queryDB(select_query)
@@ -20,10 +18,17 @@ def select_pharmacy(data):
 
 #add the pharmacy for the patients
 def insert_pharmacy(data):
-    insert_query = """INSERT INTO user_pharmacy values("""+data['id']+""" , \'"""+data['p_email']+"""\');"""
-    #print(insert_query)
+    print(data)
+    insert_query = """INSERT INTO user_pharmacy (pharm_number,p_email) values(\'"""+data['id']+"""\' , \'"""+data['p_email']+"""\');"""
+    print("-------")
+    print(insert_query)
     records = runQuery.updateDB(insert_query)
     print(records)
     return records
-## update exisiting pharmacy for patient
+## delete exisiting pharmacy for patient
+def del_pharmacy(data):
+    delete_query = """DELETE FROM user_pharmacy WHERE p_email =\'"""+data['p_email']+"""\';"""
+    print(delete_query)
+    records = runQuery.updateDB(delete_query)
+    return records
 

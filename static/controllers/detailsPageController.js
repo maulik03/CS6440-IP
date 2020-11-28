@@ -23,6 +23,7 @@ angular.module('detailsPageController.module',[]).controller('detailsPageControl
 	});
 }
 $scope.getpatientmeds()
+
 $scope.statues = [
 	{
 		"status" : "Active",
@@ -55,7 +56,46 @@ $scope.updmedstatus= function(status,med_name,med_info){
 	});
 }
 
-	$scope.logout = function(email){
+//patient BST report
+$scope.getBSReading=function(){
+	$http({
+		method : "POST",
+		  url : "/getBloodSugarReading",
+		  data :{"p_email" : $scope.p_user}
+	}).then(function mySuccess(response) {
+	console.log(response.data)
+
+	$scope.patient_bst_data = response.data;
+
+	}, function myError(response) {
+		console.log(response);
+	});
+}
+
+//Pharmacy function
+$scope.getPharmacyInfo=function(){
+	$http({
+		method : "POST",
+		  url : "/getmyPharmacy",
+		  data :{"p_email" : $scope.p_user}
+	}).then(function mySuccess(response) {
+	console.log(response.data)
+
+	$scope.myPharm_info = response.data;
+	if(response.data === undefined || response.data.length == 0){
+		$scope.displaymessage = "Patient hasnot selected their Pharmacy for more details contact patient"
+		$scope.messagebool= true;
+	}
+
+	}, function myError(response) {
+		console.log(response);
+	});
+} 
+
+$scope.getBSReading()
+$scope.getPharmacyInfo()
+
+	$scope.logout = function(user){
 		$cookies.remove("d_email");
 		$cookies.remove("is_admin");
 		$location.path("/");
