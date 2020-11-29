@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import json
 import datetime
-from pyfunctions import loginFunction,patientList,addBloodSugar,medicine,pharmacy
+from pyfunctions import loginFunction,patientList,addBloodSugar,medicine,pharmacy,prescription
 import configparser
 import os
 
@@ -37,8 +37,8 @@ def getpatients():
 @app.route("/insertBloodSugar", methods=['GET','POST'])
 def insertBloodSugar():
     data = request.get_json()
-    print(data)
-    print("---")
+    # print(data)
+    # print("---")
     raw_data = addBloodSugar.insertBloodSugarReading(data)
     return  json.dumps(raw_data)
 
@@ -47,7 +47,7 @@ def insertBloodSugar():
 def getBloodSugarReading():
     data = request.get_json()
     reading_data = addBloodSugar.getBloodSugarReading(data)
-    print(reading_data)
+    # print(reading_data)
     return json.dumps(reading_data)
 
 ## get the patient information
@@ -55,7 +55,7 @@ def getBloodSugarReading():
 def getPatientInformation():
     data = request.get_json()
     reading_data = patientList.getPatient_info(data)
-    print(reading_data)
+    # print(reading_data)
     return json.dumps(reading_data)
 
 ## get the medicine information
@@ -63,7 +63,7 @@ def getPatientInformation():
 def getMedicineInformation():
     data = request.get_json()
     reading_data = medicine.getMedicineInformation(data)
-    print(reading_data)
+    # print(reading_data)
     return json.dumps(reading_data)
 
 ## add the medicine 
@@ -71,7 +71,7 @@ def getMedicineInformation():
 def addMedicine():
     data = request.get_json()
     reading_data = medicine.insert_medicine(data)
-    print(reading_data)
+    # print(reading_data)
     return json.dumps(reading_data)
 
 ## get all the medicines 
@@ -79,7 +79,7 @@ def addMedicine():
 def getEverypatientmeds():
     data = request.get_json()
     reading_data = medicine.getALL_Medicines(data)
-    print(reading_data)
+    # print(reading_data)
     return json.dumps(reading_data)
 
 ## update the medicine  status
@@ -87,7 +87,7 @@ def getEverypatientmeds():
 def updatemedstatus():
     data = request.get_json()
     reading_data = medicine.update_medstatus(data)
-    print(reading_data)
+    # print(reading_data)
     return json.dumps(reading_data)
 
 
@@ -96,7 +96,7 @@ def updatemedstatus():
 @app.route("/getAllPharmacy", methods=['GET','POST'])
 def getallPharmacy():
     reading_data = pharmacy.getAll_pharmacy()
-    print(reading_data)
+    # print(reading_data)
     return json.dumps(reading_data)
 
 ## get the List of Pharmacy information
@@ -104,7 +104,7 @@ def getallPharmacy():
 def addmyPharmacy():
     data = request.get_json()
     reading_data = pharmacy.insert_pharmacy(data)
-    print(reading_data)
+    # print(reading_data)
     return json.dumps(reading_data)
 
 ## get the List of Pharmacy information
@@ -112,14 +112,36 @@ def addmyPharmacy():
 def getmyPharmacy():
     data = request.get_json()
     reading_data = pharmacy.select_pharmacy(data)
-    print(reading_data)
+    # print(reading_data)
     return json.dumps(reading_data)
 
 @app.route("/deletemyPharmacy", methods=['GET','POST'])
 def deletemyPharmacy():
     data = request.get_json()
     reading_data = pharmacy.del_pharmacy(data)
-    print(reading_data)
+    # print(reading_data)
+    return json.dumps(reading_data)
+
+## get the List of prescription information
+@app.route("/createPrescription", methods=['GET','POST'])
+def showRequiredInfo():
+    data = request.get_json()
+    reading_data = prescription.getrequiredPatientinfo(data)
+    # print(reading_data)
+    return json.dumps(reading_data)
+
+@app.route("/addprescriptionforMed", methods=['GET','POST'])
+def insertprescriptionformeds():
+    data = request.get_json()
+    reading_data = prescription.insertprescription(data)
+    # print(reading_data)
+    return json.dumps(reading_data)
+
+@app.route("/viewPrescription", methods=['GET','POST'])
+def viewPrescription():
+    data = request.get_json()
+    reading_data = prescription.viewpreDetails(data)
+    # print(reading_data)
     return json.dumps(reading_data)
 
 if __name__ == "__main__":

@@ -24,16 +24,6 @@ angular.module('doctorhomePageController.module',[]).controller('doctorhomePageC
 
 $scope.getPatientList()
 
-// $scope.patientsDetails= function(){
-// 	$location.path('/homePage')
-// }
-
-$scope.medPage= function(){
-	//var p_name =$scope.p_email
-	
-	$location.path('/addMedicine/')
-	document.getElementById("username").innerHTML = $scope.p_email;
-}
 
 $scope.perscribe_info = function(){
 	

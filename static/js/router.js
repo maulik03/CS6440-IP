@@ -51,6 +51,16 @@ angular.module('router.module',[]).config(function ($routeProvider) {
 			controller: 'detailsPageController',
 			templateUrl: 'static/views/detailsPage.html'
 		})
+		.when('/addPrescription/:med_name',
+		{
+			controller: 'prescriptionPageController',
+			templateUrl: 'static/views/addprescriptionPage.html'
+		})
+		.when('/viewPrescription/:p_email',
+		{
+			controller: 'viewprescriptionPageController',
+			templateUrl: 'static/views/viewprescriptionPage.html'
+		})
 		// if non of the above routes
 		// are matched we are setting router
 		// to redirect to the RootController

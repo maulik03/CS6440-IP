@@ -9,5 +9,7 @@ var app = angular.module('BloodSugarTracker',[
 'pharmacyPageController.module',
 'addMedicinePageController.module',
 'detailsPageController.module',
+'prescriptionPageController.module',
+'viewprescriptionPageController.module',
 'router.module'
 ]);

@@ -13,7 +13,11 @@ angular.module('reportPageController.module',[]).controller('reportPageControlle
   	}).then(function mySuccess(response) {
       console.log(response.data)
 
-      $scope.reading_data = response.data;
+	  $scope.reading_data = response.data;
+	  if(response.data === undefined || response.data.length == 0){
+		$scope.displaymessagePatient = "There are no Blood Sugar reading for You in the Application"
+		$scope.messageboolpatient= true;
+	}
 
   	}, function myError(response) {
   		console.log(response);

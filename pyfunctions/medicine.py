@@ -10,7 +10,7 @@ def getMedicineInformation(data):
 ## add new medicine
 
 def insert_medicine(data):
-    print(data)
+    # print(data)
     query = """
     INSERT INTO medicine (p_email,med_name, med_info, med_status)
     VALUES (\'"""+data['p_email']+"""\',\'"""+data['med_name']+"""\', \'"""+data['med_info']+"""\', \'"""+data['med_status']+"""\');"""
@@ -29,7 +29,7 @@ def update_medstatus(data):
 ## get all medicine for patient
 
 def getALL_Medicines(data):
-    print(data)
+    # print(data)
     query_1 = """select * from medicine where p_email = \'"""+data['p_email']+"""\';"""
     ##print(query_1)
     reading_records = runQuery.queryDB(query_1)

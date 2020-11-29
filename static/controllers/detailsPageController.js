@@ -18,6 +18,10 @@ angular.module('detailsPageController.module',[]).controller('detailsPageControl
 	}).then(function mySuccess(response) {
 	console.log(response.data)
 	$scope.reading_data = response.data;
+	if(response.data === undefined || response.data.length == 0){
+		$scope.displaymessageMed = "There are no Medicines for this Patient in the Application"
+		$scope.messageboolmed= true;
+	}
 	}, function myError(response) {
 		console.log(response);
 	});
@@ -66,6 +70,10 @@ $scope.getBSReading=function(){
 	console.log(response.data)
 
 	$scope.patient_bst_data = response.data;
+	if(response.data === undefined || response.data.length == 0){
+		$scope.displaymessageBst = "There are no Blood Sugar reading for this Patient in the Application"
+		$scope.messageboolB= true;
+	}
 
 	}, function myError(response) {
 		console.log(response);

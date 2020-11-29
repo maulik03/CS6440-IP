@@ -39,6 +39,7 @@ angular.module('homePageController.module',[]).controller('homePageController', 
 	}
 	$scope.getMedicineInfo()
 	$scope.getPharmacyInfo()
+	$scope.getMyprescriptionList()
 
   	}, function myError(response) {
   		console.log(response);
@@ -56,6 +57,11 @@ angular.module('homePageController.module',[]).controller('homePageController', 
       console.log(response.data)
 
 	  $scope.reading_data = response.data;
+	  if(response.data === undefined || response.data.length == 0){
+		$scope.displaymessageMed = "There are no Active Medicine for You by your Doctor!!"
+		$scope.messageboolmed= true;
+	}
+
 
   	}, function myError(response) {
   		console.log(response);
@@ -104,7 +110,28 @@ $scope.deletePharmacy=function(){
 	}, function myError(response) {
 		console.log(response);
 	});
-} 
+}
+
+$scope.getMyprescriptionList=function(){
+	$http({
+		method : "POST",
+		  url : "/viewPrescription",
+		  data :{"p_email" : $scope.user}
+	}).then(function mySuccess(response) {
+	console.log(response.data)
+
+	$scope.mypre_data = response.data;
+	if(response.data === undefined || response.data.length == 0){
+		$scope.displaymessagePatient = "There are no Prescription for You by your Doctor!!"
+		$scope.messageboolpatient= true;
+	}
+
+	}, function myError(response) {
+		console.log(response);
+	});
+}
+
+
 // page reload function
 $scope.pageReload= function(){
 	$scope.successMessage = "Pharmacy has been removed";

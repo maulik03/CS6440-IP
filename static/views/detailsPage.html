@@ -30,6 +30,7 @@
                <th>Medicine Name</th>
                <th>Medicine Advise</th>
                <th>medicine Status</th>
+               <th>Prescription</th>
              </tr>
            </thead>
            <tbody>
@@ -43,9 +44,13 @@
                   </select>
                 </div>
               </td>
+              <td><a type="button" class="btn btn-warning" ng-href="#/addPrescription/{{entry.med_name}}">Prescription</a></td>
             </tr>
            </tbody>
          </table>
+         <div class ="alert alert-info" ng-show="messageboolmed" style= "text-align: center;">
+          <strong>{{displaymessageMed}}</strong>
+        </div>
         
     </div>
     <!--pharmacy info-->
@@ -69,11 +74,14 @@
           </tr>
         </tbody>
       </table>
+      <div class ="alert alert-info" ng-show="messageboolB" style= "text-align: center;">
+        <strong>{{displaymessageBst}}</strong>
+      </div>
 
     </div>
 
     <!--Patient Pharmacy info-->
-    <div class = "container">
+    <div class = "container" >
       <h3>{{p_user}}'s Pharmacy</h3>
       <table class="table table-striped" style= "text-align: center;">
         <thead>
@@ -93,7 +101,7 @@
           </tr>
         </tbody>
       </table>
-      <div class ="alert alert-warning" ng-show="messagebool">
+      <div class ="alert alert-warning" ng-show="messagebool" style= "text-align: center;">
         <strong>{{displaymessage}}</strong>
       </div>
 
