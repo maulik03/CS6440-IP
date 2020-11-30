@@ -26,10 +26,10 @@ angular.module('pharmacyPageController.module',[]).controller('pharmacyPageContr
 
 $scope.getPharmacyList()
 
-$scope.selectmyPharmacy=function(){
+$scope.selectmyPharmacy=function(pharm_number){
 	var data ={
 		"p_email" : $scope.user,
-		"id":$scope.pharm_number,
+		"id":pharm_number,
 		"name":$scope.pharm_name
 	};
 	console.log(data);
